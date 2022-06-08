@@ -1,0 +1,42 @@
+name: autotests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Check if tests need to be run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Load tests
+        uses: actions/checkout@v2
+        with:
+          repository: wo1f/cpp-backend-tests
+
+      - name: ls
+        run: ls
+
+      - name: ls
+        run: ls cpp-backend-tests
+
+      - name: ls
+        run: ls cpp-backend-template
+
+      - name: up server
+        run: python3 cpp-backend-template/app/main.py
+
+      - name: run tests
+        run: pytest --junitxml=results.xml cpp-backend-tests/tests/test_example.py
+
+      - name: Publish XML reports
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: ./*.xml
