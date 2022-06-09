@@ -26,7 +26,7 @@ jobs:
           python3 -m pip install -r requirements.txt
 
       - run: ls
-      - run: ls /
+      - run: echo "${GITHUB_WORKSPACE}/app/main.py"
 
       - name: run tests
         run: pytest --junitxml=results.xml cpp-backend-tests/tests/test_example.py
