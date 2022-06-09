@@ -20,13 +20,11 @@ jobs:
           repository: wo1f/cpp-backend-tests
           path: 'cpp-backend-tests'
 
+#      TODO: prepare docker image
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
-
-      - run: ls
-      - run: echo "${GITHUB_WORKSPACE}/app/main.py"
 
       - name: run tests
         run: pytest --junitxml=results.xml cpp-backend-tests/tests/test_example.py
