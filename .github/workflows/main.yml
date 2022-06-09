@@ -21,14 +21,18 @@ jobs:
           repository: wo1f/cpp-backend-tests
           path: 'cpp-backend-tests'
 
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
       - name: ls
         run: ls
 
-      - name: up server
-        run: python3 ./app/main.py
-
       - name: run tests
         run: pytest --junitxml=results.xml cpp-backend-tests/tests/test_example.py
+        env:
+          DELIVERY_APP: /app/main.py
 
       - name: Publish XML reports
         uses: EnricoMi/publish-unit-test-result-action@v1
