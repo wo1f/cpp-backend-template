@@ -31,7 +31,7 @@ jobs:
       - name: run tests
         run: pytest --junitxml=results.xml cpp-backend-tests/tests/test_example.py
         env:
-          DELIVERY_APP: ${{ GITHUB_WORKSPACE }}/app/main.py
+          DELIVERY_APP: ${{ github.workspace }}/app/main.py
 
       - name: Publish XML reports
         uses: EnricoMi/publish-unit-test-result-action@v1
